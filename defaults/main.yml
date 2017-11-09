@@ -1,2 +1,4 @@
 ---
-# defaults file for ansible-repo
+zabbix_agent_listen_ip: "0.0.0.0"
+zabbix_agent_server_passive: "192.168.10.10"
+zabbix_agent_server_active: "192.168.10.10"

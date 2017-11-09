@@ -1,26 +1,26 @@
 ---
-- name: Instala dependencias
+- name: ansible-zabbix-agent | Install dependencies
   apt:
     update_cache: yes
     name: aptitude
     state: present
 
-- name: Instala o repositorio do Zabbix 3.4 Debian Stretch
+- name: ansible-zabbix-agent | Install Zabbix 3.4 repository on Debian Stretch
   apt:
     deb: http://repo.zabbix.com/zabbix/3.4/debian/pool/main/z/zabbix-release/zabbix-release_3.4-1+stretch_all.deb
   when: ansible_distribution_major_version == "9"
 
-- name: Instala o repositorio do Zabbix 3.4 Debian Jessie
+- name: ansible-zabbix-agent | Install Zabbix 3.4 repository on Debian Jessie
   apt:
     deb: http://repo.zabbix.com/zabbix/3.4/debian/pool/main/z/zabbix-release/zabbix-release_3.4-1+jessie_all.deb
   when: ansible_distribution_major_version == "8"
 
-- name: Instala o repositorio do Zabbix 3.4 Debian Wheezy
+- name: ansible-zabbix-agent | Install Zabbix 3.4 repository on Debian Wheezy
   apt:
     deb: http://repo.zabbix.com/zabbix/3.4/debian/pool/main/z/zabbix-release/zabbix-release_3.4-1+wheezy_all.deb
   when: ansible_distribution_major_version == "7"
 
-- name: Instala o pacote zabbix-agent
+- name: ansible-zabbix-agent | Install Zabbix Agent package
   apt:
     update_cache: yes
     name: zabbix-agent

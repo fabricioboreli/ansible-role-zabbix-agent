@@ -1,40 +1,59 @@
-Ansible Role Skeleton
-=====================
-Esqueleto/Modelo de estrutura de diretórios para criação de role Ansible.
+Zabbix Agent
+============
+Ansible Role that install and configure [zabbix-agent](https://www.zabbix.com/ "The Enterprise-class Monitoring Solution for Everyone").  
 
+This role add a new repository to the system containing the 3.4 version of Zabbix then install the zabbix-agent package and transfer the configuration file (_zabbix_agentd.conf_) to the host.
 
-Requisitos
-----------
-Nenhum / Debian 8
+Requirements
+------------
+Debian 7, 8 or 9  
+CentOS 7  
 
-Variaveis do Role
------------------
-Descrição das variaveis:
-
+Role Variables
+--------------
+The IP address in which the agent will listen on, if you want it to listen on all IP addresses available on the host then use '0.0.0.0':
 ```yaml
-codigo_yaml: variavel_content
+zabbix_agent_listen_ip: "0.0.0.0"
 ```
 
-Dependências
-------------
-Não depende de nenhum outro role.
-
-Playbook de exemplo
--------------------
+The IP address of the Zabbix Server for [passive checks](https://www.zabbix.com/documentation/3.4/manual/appendix/items/activepassive):
 ```yaml
-- name: Role name
-  hosts: server
+zabbix_agent_server_passive: "192.168.10.10"
+```
+
+The IP address of the Zabbix Server for [active checks](https://www.zabbix.com/documentation/3.4/manual/appendix/items/activepassive):
+```yaml
+zabbix_agent_server_active: "192.168.10.10"
+```
+
+Dependencies
+------------
+
+None.
+
+Example Playbook
+----------------
+```yaml
+---
+- name: Install and configure Zabbix Agent
+  hosts: firewall-01
   become: true
   gather_facts: true
 
   roles:
-    - role: roles_name
+    - role: ansible-role-zabbix-agent
+      zabbix_agent_listen_ip: "0.0.0.0"
+      zabbix_agent_server_passive: "192.168.10.10"
+      zabbix_agent_server_active: '{{ zabbix_agent_server_passive }}'
 ```
 
-Licença
+License
 -------
+
 MIT
 
-Informações do Autor
---------------------
-Fabricio Boreli Ferreira  
+Author Information
+------------------
+
+Fabricio Boreli  
+fabricioboreli at openmailbox dot org

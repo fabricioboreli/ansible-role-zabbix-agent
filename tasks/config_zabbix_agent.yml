@@ -1,0 +1,13 @@
+- name: ansible-zabbix_agent | Enable the agent to start on boot
+  service:
+    name: zabbix-agent
+    enabled: yes
+
+- name: ansible-zabbix-agent | Copy the configuration file to the host
+  template:
+    src: "zabbix_agentd.conf.j2"
+    dest: "/etc/zabbix/zabbix_agentd.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify: ansible-zabbix-agent | Restart the daemon

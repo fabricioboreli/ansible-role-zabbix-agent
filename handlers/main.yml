@@ -1,2 +1,5 @@
 ---
-# handlers file for ansible-repo
+- name: ansible-zabbix-agent | Restart the daemon
+  service:
+    name: zabbix-agent
+    state: restarted
